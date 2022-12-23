@@ -8,15 +8,16 @@ import { map, mergeMap, catchError } from 'rxjs/operators';
 
 import { StudentService } from 'src/app/services/student.service';
 import  * as actions from './students.actions';
+import {requestAllStudents} from './students.actions';
 
 @Injectable()
 export class StudentsEffects {
     getStudents$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(actions.StudentsType.RequestAllStudents),
+            ofType(requestAllStudents),
             mergeMap(() => this.StudentsService.getStudents()
                 .pipe(
-                    map((res: any) => (actions.requestAllStudentsSuccess(res))),
+                    map((students) => (actions.requestAllStudentsSuccess({students}))),
                     catchError((errorMessage) => of(actions.requestDeleteStudentFail (errorMessage.message)))
                 )
             )

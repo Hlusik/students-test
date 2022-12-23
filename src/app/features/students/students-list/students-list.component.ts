@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { StudentsStateFacade } from 'src/app/store/students/students.facade';
+import { StudentsStateFacade } from 'src/app/features/students/store/students.facade';
 
 import { Student } from '../student.model';
 
 @Component({
-  selector: 'app-students',
-  templateUrl: './students.component.html',
-  styleUrls: ['./students.component.scss']
+  selector: 'app-students-list',
+  templateUrl: './students-list.component.html',
+  styleUrls: ['./students-list.component.scss']
 })
-export class StudentsComponent implements OnInit {
+export class StudentsListComponent implements OnInit {
   students: Student[] = [];
   students$: Observable<Student[]> = this.studentService.students$;
   selectedStudent?: Student;

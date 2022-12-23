@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
 
-import { Student } from '../studentsModule/student.model';
+import { Student } from '../features/students/student.model';
 import { MessageService } from './message.service';
 
 @Injectable({
@@ -17,7 +17,7 @@ export class StudentService {
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
   getStudents(): Observable<Student[]> {
-    console.log(this.http.get<Student[]>(this.studentsUrl));
+    console.log(this.studentsUrl);
     return this.http.get<Student[]>(this.studentsUrl);
   }
 

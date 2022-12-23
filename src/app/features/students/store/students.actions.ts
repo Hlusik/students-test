@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Student } from "src/app/studentsModule/student.model";
+import { Student } from "src/app/features/students/student.model";
 
 export enum StudentsType{
     RequestAllStudents = '[Students page] Request All Students',

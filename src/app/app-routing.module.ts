@@ -10,11 +10,11 @@ const routes: Routes = [
     },
     {
         path: 'dashboard',
-        loadChildren: () => import('../app/dashboardModule/dashboard.module').then(m => m.DashboardModule)
+        loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule)
     },
     {
         path: 'students',
-        loadChildren: () => import('../app/studentsModule/students.module').then(m => m.StudentsModule)
+        loadChildren: () => import('./features/students/students.module').then(m => m.StudentsModule)
     },
     // {
     //   // The router will match this route if the URL requested

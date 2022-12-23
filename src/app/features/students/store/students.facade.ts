@@ -1,11 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { Student } from "src/app/studentsModule/student.model";
+import { Student } from "src/app/features/students/student.model";
 import { requestAllStudents, requestCreateStudent, requestDeleteStudent, requestEditStudent, requestSingleStudent } from "./students.actions";
 import { StudentsState } from "./students.reducer";
 import { getErrorMessage, getStudent, getStudents, isAllStudentsLoadingSelector, isSingleStudentLoadingSelector } from "./students.selectors";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class StudentsStateFacade {
 
     isAllStudentsLoading$ = this.store.select(isAllStudentsLoadingSelector);
