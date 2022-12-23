@@ -1,0 +1,17 @@
+
+.detail-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+
+    input {
+        height: 60px;
+    }
+
+    .button-space {
+        margin: 10px 0;
+        width: 100%;
+    }
+}
