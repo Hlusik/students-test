@@ -5,9 +5,7 @@ import { requestAllStudents, requestCreateStudent, requestDeleteStudent, request
 import { StudentsState } from "./students.reducer";
 import { getErrorMessage, getStudent, getStudents, isAllStudentsLoadingSelector, isSingleStudentLoadingSelector } from "./students.selectors";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class StudentsStateFacade {
 
     isAllStudentsLoading$ = this.store.select(isAllStudentsLoadingSelector);

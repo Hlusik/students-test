@@ -1,98 +1,76 @@
 import { createAction, props } from "@ngrx/store";
 import { Student } from "src/app/features/students/student.model";
 
-export enum StudentsType{
-    RequestAllStudents = '[Students page] Request All Students',
-    RequestAllStudentsSuccess = '[Students page] Request All Students Success',
-    RequestAllStudentsFail = '[Students page] Request All Students Fail',
+const actionTypePrefix = '[Students page] Request';
 
-    RequestSingleStudent = '[Students page] Request Student',
-    RequestSingleStudentSuccess = '[Students page] Request Student Success',
-    RequestSingleStudentFail = '[Students page] Request Student Fail',
-
-    RequestFilteredStudents = '[Students page] Request Filtered Students',
-    RequestFilteredStudentsSuccess = '[Students page] Request Filtered Students Success',
-
-    RequestDeleteStudent = '[Students page] Request Delete Student',
-    RequestDeleteStudentFail = '[Students page] Request Delete Student Fail',
-
-    RequestEditStudent = '[Students page] Request Edit Student',
-    RequestEditStudentSuccess = '[Students page] Request Edit Student Success',
-    RequestEditStudentFail = '[Students page] Request Filtered Students Fail',
-
-    RequestCreateStudent = '[Students page] Request Create Student',
-    RequestCreateStudentSuccess = '[Students page] Request Create Student Success',
-    RequestCreateStudentFail = '[Students page] Request Create Students Fail',
-}
-
-//--------------all students-----------------------------
+/**   all students   */
 export const requestAllStudents = createAction(
-    StudentsType.RequestAllStudents
+    `${actionTypePrefix} All Students`,
 );
 
 export const requestAllStudentsSuccess = createAction(
-    StudentsType.RequestAllStudentsSuccess,
-    props<{students: Student[]}>()
+    `${requestAllStudents.type} (Success)`,
+    props<{students: Student[]}>(),
 );
 
 export const RequestAllStudentsFail = createAction(
-    StudentsType.RequestAllStudentsFail,
-    props<{errorMessage : string}>()
+    `${requestAllStudents.type} (Fail)`,
+    props<{errorMessage : string}>(),
 );
 
-//--------------student-----------------------------
+/**   student   */
 export const requestSingleStudent = createAction(
-    StudentsType.RequestSingleStudent,
-    props<{id: number}>()
+    `${actionTypePrefix} Student`,
+    props<{id: number}>(),
 );
 
 export const requestSingleStudentSuccess = createAction(
-    StudentsType.RequestSingleStudentSuccess,
-    props<{student: Student}>()
+    `${requestSingleStudent.type} (Success)`,
+    props<{student: Student}>(),
 );
 
 export const RequestSingleStudentFail = createAction(
-    StudentsType.RequestSingleStudentFail,
-    props<{errorMessage : string}>()
+    `${requestSingleStudent.type} (Fail)`,
+    props<{errorMessage : string}>(),
 );
 
-//--------------delete student-----------------------------
+/**   delete student   */
 export const requestDeleteStudent = createAction(
-    StudentsType.RequestDeleteStudent,
-    props<{id: number}>()
+    `${actionTypePrefix} Delete Student`,
+    props<{id: number}>(),
 );
 
 export const requestDeleteStudentFail = createAction(
-    StudentsType.RequestDeleteStudentFail,
-    props<{errorMessage : string}>()
+    `${requestDeleteStudent.type} (Fail)`,
+    props<{errorMessage : string}>(),
 );
 
-//--------------edit student-----------------------------
+/**   edit student   */
 export const requestEditStudent = createAction(
-    StudentsType.RequestEditStudent,
-    props<{student: Student, id: number}>()
+    `${actionTypePrefix} Edit Student`,
+    props<{student: Student, id: number}>(),
 );
 
 export const requestEditStudentSuccess = createAction(
-    StudentsType.RequestEditStudentSuccess
+    `${requestEditStudent.type} (Success)`,
 );
 
 export const requestEditStudentFail = createAction(
-    StudentsType.RequestEditStudentFail,
+    `${requestEditStudent.type} (Fail)`,
     props<{errorMessage: string}>()
 );
 
-//--------------create student-----------------------------
+/**   create student   */
 export const requestCreateStudent = createAction(
-    StudentsType.RequestCreateStudent,
+    `${actionTypePrefix} Create Student`,
     props<{student: Student}>()
 );
 
 export const requestCreateStudentSuccess = createAction(
-    StudentsType.RequestCreateStudentSuccess
+    `${requestCreateStudent.type} (Success)`,
 );
 
 export const requestCreateStudentFail = createAction(
-    StudentsType.RequestCreateStudentFail,
+    `${requestCreateStudent.type} (Fail)`,
     props<{errorMessage : string}>()
 );

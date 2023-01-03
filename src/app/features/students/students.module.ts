@@ -16,7 +16,7 @@ import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import { studentsFeatureKey, studentsReducer } from './store/students.reducer';
 import { StudentsEffects } from './store/students.effects';
-
+import { StudentsStateFacade } from './store/students.facade';
 
 @NgModule({
   declarations: [StudentsListComponent, StudentDetailComponent],
@@ -32,7 +32,8 @@ import { StudentsEffects } from './store/students.effects';
     StoreModule.forFeature(studentsFeatureKey, studentsReducer),
     EffectsModule.forFeature([StudentsEffects])
   ],
-  exports: [StudentsListComponent]
+  exports: [StudentsListComponent],
+  providers: [StudentsStateFacade]
 })
 export class StudentsModule {
 }

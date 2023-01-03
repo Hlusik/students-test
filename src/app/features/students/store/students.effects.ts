@@ -14,7 +14,7 @@ import {requestAllStudents} from './students.actions';
 export class StudentsEffects {
     getStudents$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(requestAllStudents),
+            ofType(actions.requestAllStudents),
             mergeMap(() => this.StudentsService.getStudents()
                 .pipe(
                     map((students) => (actions.requestAllStudentsSuccess({students}))),
@@ -26,7 +26,7 @@ export class StudentsEffects {
 
     getStudent$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(actions.StudentsType.RequestSingleStudent),
+            ofType(actions.requestSingleStudent),
             mergeMap((action: any) => this.StudentsService.getStudent(action.id)
                 .pipe(
                     map((res: any) => (actions.requestSingleStudentSuccess(res))),
@@ -38,7 +38,7 @@ export class StudentsEffects {
 
     deleteStudent$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(actions.StudentsType.RequestDeleteStudent),
+            ofType(actions.requestDeleteStudent),
             mergeMap((action: any) => this.StudentsService.deleteStudent(action.id)
                 .pipe(
                     map(() => (actions.requestAllStudents())),
@@ -50,7 +50,7 @@ export class StudentsEffects {
 
     editStudent$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(actions.StudentsType.RequestEditStudent),
+            ofType(actions.requestEditStudent),
             mergeMap((action:any) => this.StudentsService.updateStudent(action.Student)
                 .pipe(
                     map(() => (actions.requestEditStudentSuccess())),
@@ -62,7 +62,7 @@ export class StudentsEffects {
 
     createStudent$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(actions.StudentsType.RequestCreateStudent),
+            ofType(actions.requestCreateStudent),
             mergeMap((action: any) => this.StudentsService.addStudent(action.Student)
                 .pipe(
                     map(() => (actions.requestCreateStudentSuccess ())),
