@@ -8,7 +8,6 @@ import { map, mergeMap, catchError } from 'rxjs/operators';
 
 import { StudentService } from 'src/app/services/student.service';
 import  * as actions from './students.actions';
-import {requestAllStudents} from './students.actions';
 
 @Injectable()
 export class StudentsEffects {
