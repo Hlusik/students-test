@@ -3,14 +3,17 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { TestScheduler } from 'rxjs/testing';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 import { StudentService } from 'src/app/services/student.service';
 import { Student } from '../student.model';
-import { requestAllStudents, requestAllStudentsSuccess } from './students.actions';
+import {
+  requestAllStudents,
+  requestAllStudentsSuccess,
+  requestSingleStudent,
+  requestSingleStudentSuccess,
+} from './students.actions';
 import { StudentsEffects } from './students.effects';
-import { StudentsState } from './students.reducer';
 
 const mockStudents: Student[] = [
   {
@@ -23,25 +26,24 @@ const mockStudents: Student[] = [
   },
 ];
 
+const mockStudent: Student = {
+    id: 2,
+    name: 'Second Student',
+  };
+
 const initialState = {
   students: [],
   student: {},
   isAllStudentsLoading: false,
   isSingleStudentLoading: false,
   errorMessage: ' ',
-}
-
-class MockStudentService {
-  getStudents() {
-    return of(mockStudents);
-  }
-}
+};
 
 describe('Students Effects', () => {
-  let actions$: Observable<Action>;
+  let actions$ = new BehaviorSubject<Action>({ type: requestAllStudents.type });
   let effects: StudentsEffects;
-  let store: MockStore<StudentsState>;
-  // let store: MockStore<Pick<StudentsState, 'students'>>;
+  let resultActions: Action[];
+  // let store: MockStore<StudentsState>;
   let studentService: StudentService;
 
   beforeEach(() => {
@@ -50,12 +52,19 @@ describe('Students Effects', () => {
         StudentsEffects,
         provideMockActions(() => actions$),
         provideMockStore({ initialState }),
-        { provide: StudentService, useClass: MockStudentService },
+        {
+          provide: StudentService,
+          useFactory: () => jasmine.createSpyObj<StudentService>({
+            getStudents: of(mockStudents),
+            getStudent: of(mockStudent),
+          }),
+        },
       ],
     });
     effects = TestBed.inject(StudentsEffects);
-    store = TestBed.inject(MockStore);
+    // store = TestBed.inject(MockStore);
     studentService = TestBed.inject(StudentService);
+    resultActions = [];
   });
 
   it('should be created', () => {
@@ -63,16 +72,37 @@ describe('Students Effects', () => {
   });
 
   describe('getStudents$', () => {
-    it('should call getStudents method', (done) => {
-      const spy = spyOn(studentService, 'getStudents').and.callThrough();
+    it('should call getStudents method', () => {
+      setAction(requestAllStudents);
 
-      actions$ = of(requestAllStudents);
+      subscribeTo(effects.getStudents$);
+      console.log(resultActions);
+      expect(resultActions).toEqual([
+        requestAllStudentsSuccess({ students: mockStudents })
+      ]);
+      expect(studentService.getStudents).toHaveBeenCalledTimes(1);
+    });
 
-      effects.getStudents$.subscribe((res) => {
-        expect(res).toEqual(requestAllStudentsSuccess({ students: mockStudents }));
-        expect(spy).toHaveBeenCalledTimes(1);
-        done();
-      });
+    it('should call getStudent method', () => {
+      setAction(requestSingleStudent);
+
+      subscribeTo(effects.getStudent$);
+      console.log(resultActions);
+      expect(resultActions).toEqual([
+        requestSingleStudentSuccess({ student: mockStudent })
+      ]);
+      expect(studentService.getStudent).toHaveBeenCalledTimes(1);
     });
   });
+
+  function setAction( a: Action): void {
+    actions$.next(a);
+  }
+
+  function subscribeTo(o: Observable<Action>): void {
+    o.subscribe(
+      r => resultActions.push(r),
+      () => fail('There should be no errors here.'),
+    );
+  }
 });

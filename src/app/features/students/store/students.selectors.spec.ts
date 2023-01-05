@@ -24,15 +24,28 @@ describe('Selectors', () => {
   };
 
   it('should select the student list', () => {
+    const studentsRes: Student[] = [
+      {
+        id: 1,
+        name: 'First Student',
+      },
+      {
+        id: 2,
+        name: 'Second Student',
+      },
+    ];
     const result = getStudentsState.projector(initialState);
     expect(result.students.length).toEqual(2);
-    expect(result.students[1].id).toEqual(2);
+    expect(result.students).toEqual(studentsRes);
   });
 
   it('should select the student', () => {
+    const studentRes: Student = {
+      id: 1,
+      name: 'First Student',
+    };
     const result = getStudentsState.projector(initialState);
-    expect(result.student.id).toEqual(1);
-    expect(result.student.name).toEqual('First Student');
+    expect(result.student).toEqual(studentRes);
   });
 
   it('should select the is All Students Loading', () => {
