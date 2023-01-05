@@ -20,20 +20,33 @@ describe('Selectors', () => {
     },
     isAllStudentsLoading: false,
     isSingleStudentLoading: false,
-    errorMessage: '',
+    errorMessage: 'Error',
   };
 
   it('should select the student list', () => {
-    const result = getStudentsState.projector(initialState.students);
+    const result = getStudentsState.projector(initialState);
     expect(result.students.length).toEqual(2);
     expect(result.students[1].id).toEqual(2);
   });
 
   it('should select the student', () => {
-    const result = getStudentsState.projector(
-      initialState.student
-    );
+    const result = getStudentsState.projector(initialState);
     expect(result.student.id).toEqual(1);
     expect(result.student.name).toEqual('First Student');
+  });
+
+  it('should select the is All Students Loading', () => {
+    const result = getStudentsState.projector(initialState);
+    expect(result.isAllStudentsLoading).toEqual(false);
+  });
+
+  it('should select the is single Students Loading', () => {
+    const result = getStudentsState.projector(initialState);
+    expect(result.isSingleStudentLoading).toEqual(false);
+  });
+
+  it('should select the errorMessage', () => {
+    const result = getStudentsState.projector(initialState);
+    expect(result.errorMessage).toEqual('Error');
   });
 });
