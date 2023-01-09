@@ -10,7 +10,7 @@ import { Student } from '../student.model';
   styleUrls: ['./students-list.component.scss']
 })
 export class StudentsListComponent implements OnInit {
-  students: Student[] = [];
+  // students: Student[] = [];
   students$: Observable<Student[]> = this.studentService.students$;
   selectedStudent?: Student;
 
@@ -32,7 +32,6 @@ export class StudentsListComponent implements OnInit {
   }
 
   delete(student: Student): void {
-    this.students = this.students.filter(h => h !== student);
     this.studentService.deleteStudent(student.id);
   }
 

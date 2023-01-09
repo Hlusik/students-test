@@ -5,17 +5,17 @@
     <input matInput type="text" id="new-student" #studentName />
 </mat-form-field>
 
-<button mat-button type="button" class="add-button" (click)="add(studentName.value); studentName.value=''">
+<button mat-button color="primary" (click)="add(studentName.value); studentName.value=''">
     Add student
 </button>
 
 
 <mat-selection-list>
     <mat-list-item class="student" role="listitem" *ngFor="let student of students$ | async">
-        <a class="student" routerLink="/detail/{{student.id}}">
+        <a class="student" routerLink="/students/{{student.id}}">
             <span class="badge">{{student.id}}</span> {{student.name}}
         </a>
-        <button mat-button type="button" class="delete" title="delete student"
+        <button mat-button color="warn" title="delete student"
             (click)="delete(student)">x</button>
     </mat-list-item>
 </mat-selection-list>

@@ -18,6 +18,12 @@ export const getStudents = createSelector(
     getStudentsState,
     (StudentsState: StudentsState) => StudentsState.students
 );
+
+export const getTopStudents = createSelector(
+    getStudentsState,
+    (StudentsState: StudentsState) => StudentsState.topStudents
+);
+
 export const getStudent = createSelector(
     getStudentsState,
     (StudentsState: StudentsState) => StudentsState.student

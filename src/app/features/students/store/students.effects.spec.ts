@@ -76,7 +76,6 @@ describe('Students Effects', () => {
       setAction(requestAllStudents);
 
       subscribeTo(effects.getStudents$);
-      console.log(resultActions);
       expect(resultActions).toEqual([
         requestAllStudentsSuccess({ students: mockStudents })
       ]);
@@ -87,7 +86,6 @@ describe('Students Effects', () => {
       setAction(requestSingleStudent);
 
       subscribeTo(effects.getStudent$);
-      console.log(resultActions);
       expect(resultActions).toEqual([
         requestSingleStudentSuccess({ student: mockStudent })
       ]);

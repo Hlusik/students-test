@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { StudentService } from 'src/app/services/student.service';
+import { StudentsStateFacade } from 'src/app/features/students/store/students.facade';
 import { Student } from '../student.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-student-detail',
@@ -11,11 +12,12 @@ import { Student } from '../student.model';
   styleUrls: ['./student-detail.component.scss']
 })
 export class StudentDetailComponent implements OnInit {
-  student: Student | undefined;
+  student: Student | undefined ;
+  student$: Observable<Student> = this.studentService.student$;
 
   constructor(
     private route: ActivatedRoute,
-    private studentService: StudentService,
+    private studentService: StudentsStateFacade,
     private location: Location
   ) {}
 
@@ -25,8 +27,9 @@ export class StudentDetailComponent implements OnInit {
 
   getStudent(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.studentService.getStudent(id)
-      .subscribe(student => this.student = student);
+    this.studentService.getStudent(id);
+    this.studentService.student$
+      .subscribe({next: student => this.student = Object.assign({},student)});
   }
 
   goBack(): void {
@@ -35,8 +38,7 @@ export class StudentDetailComponent implements OnInit {
 
   save(): void {
     if (this.student) {
-      this.studentService.updateStudent(this.student)
-        .subscribe(() => this.goBack());
+      this.studentService.editStudent(this.student, this.student.id)
     }
   }
 

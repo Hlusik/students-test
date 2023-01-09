@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Student } from "src/app/features/students/student.model";
-import { requestAllStudents, requestCreateStudent, requestDeleteStudent, requestEditStudent, requestSingleStudent } from "./students.actions";
+import { requestAllStudents, requestCreateStudent, requestDeleteStudent, requestEditStudent, requestSingleStudent, requestTopStudents } from "./students.actions";
 import { StudentsState } from "./students.reducer";
-import { getErrorMessage, getStudent, getStudents, isAllStudentsLoadingSelector, isSingleStudentLoadingSelector } from "./students.selectors";
+import { getErrorMessage, getStudent, getStudents, getTopStudents, isAllStudentsLoadingSelector, isSingleStudentLoadingSelector } from "./students.selectors";
 
 @Injectable()
 export class StudentsStateFacade {
@@ -11,6 +11,7 @@ export class StudentsStateFacade {
     isAllStudentsLoading$ = this.store.select(isAllStudentsLoadingSelector);
     isSingleStudentLoading$ = this.store.select(isSingleStudentLoadingSelector);
     students$ = this.store.select(getStudents);
+    topStudents$ = this.store.select(getTopStudents);
     student$ = this.store.select(getStudent);
     errorMessage$ = this.store.select(getErrorMessage);
 
@@ -18,6 +19,10 @@ export class StudentsStateFacade {
 
     getStudents(): void {
         this.store.dispatch( requestAllStudents());
+    }
+
+    getTopStudents(): void {
+        this.store.dispatch( requestTopStudents());
     }
 
     getStudent(id: number): void {

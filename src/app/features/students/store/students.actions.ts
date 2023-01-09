@@ -18,6 +18,20 @@ export const RequestAllStudentsFail = createAction(
     props<{errorMessage : string}>(),
 );
 
+export const requestTopStudents = createAction(
+    `${actionTypePrefix} Top Students`,
+);
+
+export const requestTopStudentsSuccess = createAction(
+    `${requestTopStudents.type} (Success)`,
+    props<{topStudents: Student[]}>(),
+);
+
+export const RequestTopStudentsFail = createAction(
+    `${requestTopStudents.type} (Fail)`,
+    props<{errorMessage : string}>(),
+);
+
 /**   student   */
 export const requestSingleStudent = createAction(
     `${actionTypePrefix} Student`,

@@ -7,6 +7,7 @@ export const studentsFeatureKey = 'studentsFeatureKey';
 
 export interface StudentsState {
   students: Student[],
+  topStudents: Student[],
   student: Student,
   isAllStudentsLoading: boolean,
   isSingleStudentLoading: boolean,
@@ -15,6 +16,7 @@ export interface StudentsState {
 
 export const initialState: StudentsState = {
   students: [],
+  topStudents: [],
   student: {
     id: 0,
     name: ''
@@ -29,6 +31,10 @@ const reducer = createReducer(
   on(StudentsPageActions.requestAllStudents, state => ({...state})),
   on(StudentsPageActions.requestAllStudentsSuccess, (state, {students}) => ({...state, students: students})),
   on(StudentsPageActions.RequestAllStudentsFail, (state, {errorMessage}) => ({...state, errorMessage: errorMessage})),
+
+  on(StudentsPageActions.requestTopStudents, state => ({...state})),
+  on(StudentsPageActions.requestTopStudentsSuccess, (state, {topStudents}) => ({...state, topStudents: topStudents})),
+  on(StudentsPageActions.RequestTopStudentsFail, (state, {errorMessage}) => ({...state, errorMessage: errorMessage})),
 
   on(StudentsPageActions.requestSingleStudent, state => ({...state})),
   on(StudentsPageActions.requestSingleStudentSuccess, (state, {student}) => ({...state, student: student})),

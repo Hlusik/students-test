@@ -1,8 +1,9 @@
 <h2>Top Students</h2>
-<mat-grid-list [cols]="1" rowHeight="15:1">
-    <mat-grid-tile *ngFor="let student of students">
-        <button class="button" mat-button routerLink="/{{student.id}}">
-            {{student.name}}
-        </button>
-    </mat-grid-tile>
-</mat-grid-list>
+
+<mat-selection-list>
+    <mat-list-item class="student" role="listitem" *ngFor="let student of students$ | async">
+        <a class="student" routerLink="/students/{{student.id}}">
+            <span class="badge">{{student.id}}</span> {{student.name}}
+        </a>
+    </mat-list-item>
+</mat-selection-list>

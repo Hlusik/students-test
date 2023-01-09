@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, take } from 'rxjs';
 
-import { StudentService } from 'src/app/services/student.service';
 import { Student } from 'src/app/features/students/student.model';
+
+import { StudentsStateFacade } from '../../students/store/students.facade';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,16 +13,17 @@ import { Student } from 'src/app/features/students/student.model';
 export class DashboardComponent implements OnInit {
 
   students: Student[] = [];
+  students$: Observable<Student[]> = this.studentService.students$;
 
-  constructor(private studentService: StudentService) { }
+  constructor(private studentService: StudentsStateFacade) { }
 
   ngOnInit(): void {
     this.getStudents();
   }
 
   getStudents(): void {
-    this.studentService.getStudents()
-      .subscribe(students => this.students = students.slice(1, 5));
+    this.studentService.getStudents();
+    this.studentService.students$.pipe(take(5)).subscribe(topStudents => console.log(topStudents));
   }
 
 }
