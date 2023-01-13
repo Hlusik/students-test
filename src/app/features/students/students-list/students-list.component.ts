@@ -10,9 +10,8 @@ import { Student } from '../student.model';
   styleUrls: ['./students-list.component.scss']
 })
 export class StudentsListComponent implements OnInit {
-  // students: Student[] = [];
-  students$: Observable<Student[]> = this.studentService.students$;
-  selectedStudent?: Student;
+  readonly students$: Observable<Student[]> = this.studentService.students$;
+  isAllStudentsLoading$: Observable<boolean> = this.studentService.isAllStudentsLoading$;
 
   constructor(private studentService: StudentsStateFacade) { }
 
@@ -22,13 +21,12 @@ export class StudentsListComponent implements OnInit {
 
   getStudents(): void {
     this.studentService.getStudents();
-    this.students$ = this.studentService.students$;
   }
 
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.studentService.createStudent({ name } as Student);
+    this.studentService.createStudent({ name });
   }
 
   delete(student: Student): void {

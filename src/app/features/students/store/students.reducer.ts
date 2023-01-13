@@ -7,8 +7,7 @@ export const studentsFeatureKey = 'studentsFeatureKey';
 
 export interface StudentsState {
   students: Student[],
-  topStudents: Student[],
-  student: Student,
+  singleStudent: Student,
   isAllStudentsLoading: boolean,
   isSingleStudentLoading: boolean,
   errorMessage: string,
@@ -16,40 +15,36 @@ export interface StudentsState {
 
 export const initialState: StudentsState = {
   students: [],
-  topStudents: [],
-  student: {
+  singleStudent: {
     id: 0,
     name: ''
   },
-  isAllStudentsLoading: false,
-  isSingleStudentLoading: false,
+  isAllStudentsLoading: true,
+  isSingleStudentLoading: true,
   errorMessage: '',
 };
 
 const reducer = createReducer(
   initialState,
-  on(StudentsPageActions.requestAllStudents, state => ({...state})),
-  on(StudentsPageActions.requestAllStudentsSuccess, (state, {students}) => ({...state, students: students})),
-  on(StudentsPageActions.RequestAllStudentsFail, (state, {errorMessage}) => ({...state, errorMessage: errorMessage})),
+  on(StudentsPageActions.loadAllStudents, state => ({...state, isAllStudentsLoading: true})),
+  on(StudentsPageActions.loadAllStudentsSuccess, (state, {students}) => ({...state, students: students, isAllStudentsLoading: false })),
+  on(StudentsPageActions.loadAllStudentsFail, (state, {errorMessage}) => ({...state, errorMessage: errorMessage, isAllStudentsLoading: false })),
 
-  on(StudentsPageActions.requestTopStudents, state => ({...state})),
-  on(StudentsPageActions.requestTopStudentsSuccess, (state, {topStudents}) => ({...state, topStudents: topStudents})),
-  on(StudentsPageActions.RequestTopStudentsFail, (state, {errorMessage}) => ({...state, errorMessage: errorMessage})),
+  on(StudentsPageActions.loadSingleStudent, state => ({...state, isSingleStudentLoading: true})),
+  on(StudentsPageActions.loadSingleStudentSuccess, (state, {singleStudent}) => ({...state, singleStudent: singleStudent, isSingleStudentLoading: false})),
+  on(StudentsPageActions.loadSingleStudentFail, (state, {errorMessage}) => ({...state, errorMessage: errorMessage, isSingleStudentLoading: false})),
 
-  on(StudentsPageActions.requestSingleStudent, state => ({...state})),
-  on(StudentsPageActions.requestSingleStudentSuccess, (state, {student}) => ({...state, student: student})),
-  on(StudentsPageActions.RequestSingleStudentFail, (state, {errorMessage}) => ({...state, errorMessage: errorMessage})),
+  on(StudentsPageActions.deleteStudent, state => ({...state})),
+  on(StudentsPageActions.deleteStudentSuccess, state => ({...state})),
+  on(StudentsPageActions.deleteStudentFail, (state, {errorMessage}) => ({...state, errorMessage: errorMessage})),
 
-  on(StudentsPageActions.requestDeleteStudent, state => ({...state})),
-  on(StudentsPageActions.RequestSingleStudentFail, (state, {errorMessage}) => ({...state, errorMessage: errorMessage})),
+  on(StudentsPageActions.editStudent, state => ({...state})),
+  on(StudentsPageActions.editStudentSuccess, state => ({...state})),
+  on(StudentsPageActions.editStudentFail, (state, {errorMessage}) => ({...state, errorMessage: errorMessage})),
 
-  on(StudentsPageActions.requestEditStudent, state => ({...state})),
-  on(StudentsPageActions.requestEditStudentSuccess, state => ({...state})),
-  on(StudentsPageActions.requestEditStudentFail, (state, {errorMessage}) => ({...state, errorMessage: errorMessage})),
-
-  on(StudentsPageActions.requestCreateStudent, state => ({...state})),
-  on(StudentsPageActions.requestCreateStudentSuccess, state => ({...state})),
-  on(StudentsPageActions.requestCreateStudentFail, (state, {errorMessage}) => ({...state, errorMessage: errorMessage}))
+  on(StudentsPageActions.createStudent, state => ({...state})),
+  on(StudentsPageActions.createStudentSuccess, state => ({...state})),
+  on(StudentsPageActions.createStudentFail, (state, {errorMessage}) => ({...state, errorMessage: errorMessage}))
 );
 
 export const studentsReducer = (state: StudentsState, action: Action): StudentsState => reducer(state, action);

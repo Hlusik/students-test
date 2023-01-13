@@ -11,9 +11,8 @@ import { StudentsStateFacade } from '../../students/store/students.facade';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
-  students: Student[] = [];
-  students$: Observable<Student[]> = this.studentService.students$;
+  students$: Observable<Student[]> = this.studentService.topStudents$;
+  isAllStudentsLoading$: Observable<boolean> = this.studentService.isAllStudentsLoading$;
 
   constructor(private studentService: StudentsStateFacade) { }
 
@@ -23,7 +22,6 @@ export class DashboardComponent implements OnInit {
 
   getStudents(): void {
     this.studentService.getStudents();
-    this.studentService.students$.pipe(take(5)).subscribe(topStudents => console.log(topStudents));
   }
 
 }

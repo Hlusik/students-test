@@ -27,4 +27,8 @@ describe('StudentsListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should get students', () => {
+    expect(component).toBeTruthy();
+  });
 });

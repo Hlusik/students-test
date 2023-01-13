@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Student } from "src/app/features/students/student.model";
-import { requestAllStudents, requestCreateStudent, requestDeleteStudent, requestEditStudent, requestSingleStudent, requestTopStudents } from "./students.actions";
+import { createStudent, deleteStudent, editStudent, loadAllStudents, loadSingleStudent } from "./students.actions";
 import { StudentsState } from "./students.reducer";
 import { getErrorMessage, getStudent, getStudents, getTopStudents, isAllStudentsLoadingSelector, isSingleStudentLoadingSelector } from "./students.selectors";
 
@@ -12,32 +12,28 @@ export class StudentsStateFacade {
     isSingleStudentLoading$ = this.store.select(isSingleStudentLoadingSelector);
     students$ = this.store.select(getStudents);
     topStudents$ = this.store.select(getTopStudents);
-    student$ = this.store.select(getStudent);
+    singleStudent$ = this.store.select(getStudent);
     errorMessage$ = this.store.select(getErrorMessage);
 
     constructor(private store: Store<StudentsState>) { }
 
     getStudents(): void {
-        this.store.dispatch( requestAllStudents());
-    }
-
-    getTopStudents(): void {
-        this.store.dispatch( requestTopStudents());
+        this.store.dispatch( loadAllStudents());
     }
 
     getStudent(id: number): void {
-        this.store.dispatch( requestSingleStudent({id}));
+        this.store.dispatch( loadSingleStudent({id}));
     }
 
-    editStudent(student: Student, id: number): void {
-        this.store.dispatch( requestEditStudent({student, id}));
+    editStudent(singleStudent: Student, id: number): void {
+        this.store.dispatch( editStudent({singleStudent, id}));
     }
 
-    createStudent(student: Student): void {
-        this.store.dispatch( requestCreateStudent({student}));
+    createStudent(singleStudent: Pick<Student, 'name'>): void {
+        this.store.dispatch( createStudent({ singleStudent }));
     }
 
     deleteStudent(id: number):void {
-        this.store.dispatch( requestDeleteStudent({id}));
+        this.store.dispatch( deleteStudent({id}));
     }
 }

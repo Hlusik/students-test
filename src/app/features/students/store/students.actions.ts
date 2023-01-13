@@ -1,90 +1,80 @@
 import { createAction, props } from "@ngrx/store";
 import { Student } from "src/app/features/students/student.model";
 
-const actionTypePrefix = '[Students page] Request';
+const actionTypePrefix = '[Students page]';
 
 /**   all students   */
-export const requestAllStudents = createAction(
-    `${actionTypePrefix} All Students`,
+export const loadAllStudents = createAction(
+    `${actionTypePrefix} load All Students`,
 );
 
-export const requestAllStudentsSuccess = createAction(
-    `${requestAllStudents.type} (Success)`,
+export const loadAllStudentsSuccess = createAction(
+    `${loadAllStudents.type} (Success)`,
     props<{students: Student[]}>(),
 );
 
-export const RequestAllStudentsFail = createAction(
-    `${requestAllStudents.type} (Fail)`,
-    props<{errorMessage : string}>(),
-);
-
-export const requestTopStudents = createAction(
-    `${actionTypePrefix} Top Students`,
-);
-
-export const requestTopStudentsSuccess = createAction(
-    `${requestTopStudents.type} (Success)`,
-    props<{topStudents: Student[]}>(),
-);
-
-export const RequestTopStudentsFail = createAction(
-    `${requestTopStudents.type} (Fail)`,
+export const loadAllStudentsFail = createAction(
+    `${loadAllStudents.type} (Fail)`,
     props<{errorMessage : string}>(),
 );
 
 /**   student   */
-export const requestSingleStudent = createAction(
+export const loadSingleStudent = createAction(
     `${actionTypePrefix} Student`,
     props<{id: number}>(),
 );
 
-export const requestSingleStudentSuccess = createAction(
-    `${requestSingleStudent.type} (Success)`,
-    props<{student: Student}>(),
+export const loadSingleStudentSuccess = createAction(
+    `${loadSingleStudent.type} (Success)`,
+    props<{singleStudent: Student}>(),
 );
 
-export const RequestSingleStudentFail = createAction(
-    `${requestSingleStudent.type} (Fail)`,
+export const loadSingleStudentFail = createAction(
+    `${loadSingleStudent.type} (Fail)`,
     props<{errorMessage : string}>(),
 );
 
 /**   delete student   */
-export const requestDeleteStudent = createAction(
+export const deleteStudent = createAction(
     `${actionTypePrefix} Delete Student`,
     props<{id: number}>(),
 );
 
-export const requestDeleteStudentFail = createAction(
-    `${requestDeleteStudent.type} (Fail)`,
+export const deleteStudentSuccess = createAction(
+    `${deleteStudent.type} (Success)`,
+);
+
+export const deleteStudentFail = createAction(
+    `${deleteStudent.type} (Fail)`,
     props<{errorMessage : string}>(),
 );
 
 /**   edit student   */
-export const requestEditStudent = createAction(
+export const editStudent = createAction(
     `${actionTypePrefix} Edit Student`,
-    props<{student: Student, id: number}>(),
+    props<{singleStudent: Student, id: number}>(),
 );
 
-export const requestEditStudentSuccess = createAction(
-    `${requestEditStudent.type} (Success)`,
+export const editStudentSuccess = createAction(
+    `${editStudent.type} (Success)`,
 );
 
-export const requestEditStudentFail = createAction(
-    `${requestEditStudent.type} (Fail)`,
+export const editStudentFail = createAction(
+    `${editStudent.type} (Fail)`,
     props<{errorMessage: string}>()
 );
 
 /**   create student   */
-export const requestCreateStudent = createAction(
+export const createStudent = createAction(
     `${actionTypePrefix} Create Student`,
-    props<{student: Student}>()
+    props<{singleStudent: Pick<Student, 'name'>}>()
 );
 
-export const requestCreateStudentSuccess = createAction(
-    `${requestCreateStudent.type} (Success)`,
+export const createStudentSuccess = createAction(
+    `${createStudent.type} (Success)`,
 );
 
-export const requestCreateStudentFail = createAction(
-    `${requestCreateStudent.type} (Fail)`,
+export const createStudentFail = createAction(
+    `${createStudent.type} (Fail)`,
     props<{errorMessage : string}>()
 );

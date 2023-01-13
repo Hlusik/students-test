@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
@@ -23,6 +24,7 @@ import { StudentsStateFacade } from '../students/store/students.facade';
     DashboardRoutingModule,
     MatButtonModule,
     MatGridListModule,
+    MatProgressSpinnerModule,
     MatListModule,
     RouterModule,
     StoreModule.forFeature(studentsFeatureKey, studentsReducer),

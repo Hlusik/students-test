@@ -14,7 +14,7 @@ describe('Selectors', () => {
         name: 'Second Student',
       },
     ],
-    student: {
+    singleStudent: {
       id: 1,
       name: 'First Student',
     },
@@ -45,7 +45,7 @@ describe('Selectors', () => {
       name: 'First Student',
     };
     const result = getStudentsState.projector(initialState);
-    expect(result.student).toEqual(studentRes);
+    expect(result.singleStudent).toEqual(studentRes);
   });
 
   it('should select the is All Students Loading', () => {

@@ -21,12 +21,12 @@ export const getStudents = createSelector(
 
 export const getTopStudents = createSelector(
     getStudentsState,
-    (StudentsState: StudentsState) => StudentsState.topStudents
+    (StudentsState: StudentsState) => StudentsState.students?.slice(0,5)
 );
 
 export const getStudent = createSelector(
     getStudentsState,
-    (StudentsState: StudentsState) => StudentsState.student
+    (StudentsState: StudentsState) => StudentsState.singleStudent
 );
 
 export const getErrorMessage = createSelector(

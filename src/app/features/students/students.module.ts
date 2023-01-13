@@ -11,6 +11,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {StudentsListComponent} from './students-list/students-list.component';
 import {StudentDetailComponent} from './student-detail/student-detail.component';
 import {StudentsRoutingModule} from './students-routing.module';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
@@ -27,6 +28,7 @@ import { StudentsStateFacade } from './store/students.facade';
     MatInputModule,
     MatListModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     RouterModule,
     StudentsRoutingModule,
     StoreModule.forFeature(studentsFeatureKey, studentsReducer),

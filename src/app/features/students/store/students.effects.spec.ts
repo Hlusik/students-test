@@ -7,12 +7,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 
 import { StudentService } from 'src/app/services/student.service';
 import { Student } from '../student.model';
-import {
-  requestAllStudents,
-  requestAllStudentsSuccess,
-  requestSingleStudent,
-  requestSingleStudentSuccess,
-} from './students.actions';
+import { loadAllStudents, loadAllStudentsSuccess, loadSingleStudent, loadSingleStudentSuccess } from './students.actions';
 import { StudentsEffects } from './students.effects';
 
 const mockStudents: Student[] = [
@@ -40,7 +35,7 @@ const initialState = {
 };
 
 describe('Students Effects', () => {
-  let actions$ = new BehaviorSubject<Action>({ type: requestAllStudents.type });
+  let actions$ = new BehaviorSubject<Action>({ type: loadAllStudents.type });
   let effects: StudentsEffects;
   let resultActions: Action[];
   // let store: MockStore<StudentsState>;
@@ -73,21 +68,21 @@ describe('Students Effects', () => {
 
   describe('getStudents$', () => {
     it('should call getStudents method', () => {
-      setAction(requestAllStudents);
+      setAction(loadAllStudents);
 
       subscribeTo(effects.getStudents$);
       expect(resultActions).toEqual([
-        requestAllStudentsSuccess({ students: mockStudents })
+        loadAllStudentsSuccess({ students: mockStudents })
       ]);
       expect(studentService.getStudents).toHaveBeenCalledTimes(1);
     });
 
     it('should call getStudent method', () => {
-      setAction(requestSingleStudent);
+      setAction(loadSingleStudent);
 
       subscribeTo(effects.getStudent$);
       expect(resultActions).toEqual([
-        requestSingleStudentSuccess({ student: mockStudent })
+        loadSingleStudentSuccess({ singleStudent: mockStudent })
       ]);
       expect(studentService.getStudent).toHaveBeenCalledTimes(1);
     });

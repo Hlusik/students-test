@@ -1,5 +1,5 @@
 import * as fromReducer from './students.reducer';
-import { requestAllStudentsSuccess, requestDeleteStudent, requestSingleStudentSuccess } from './students.actions';
+import { deleteStudent, loadAllStudentsSuccess, loadSingleStudentSuccess } from './students.actions';
 import { Student } from '../student.model';
 
 const newState: fromReducer.StudentsState = {
@@ -13,7 +13,7 @@ const newState: fromReducer.StudentsState = {
       name: 'Second Student',
     },
   ],
-  student: {
+  singleStudent: {
     id: 1,
     name: 'First Student',
   },
@@ -39,7 +39,7 @@ describe('StudentsReducer', () => {
     it('should retrieve all students and update the state in an immutable way', () => {
       const { initialState } = fromReducer;
 
-      const action = requestAllStudentsSuccess({ students: newState.students });
+      const action = loadAllStudentsSuccess({ students: newState.students });
       const state = fromReducer.studentsReducer(initialState, action);
 
       expect(state.students).toEqual(newState.students);
@@ -49,10 +49,10 @@ describe('StudentsReducer', () => {
     it('should retrieve single student and update the state in an immutable way', () => {
       const { initialState } = fromReducer;
 
-      const action = requestSingleStudentSuccess({ student: newState.student });
+      const action = loadSingleStudentSuccess({ singleStudent: newState.singleStudent });
       const state = fromReducer.studentsReducer(initialState, action);
 
-      expect(state.student).toEqual(newState.student);
+      expect(state.singleStudent).toEqual(newState.singleStudent);
       expect(state).not.toBe(initialState);
     });
 
@@ -75,7 +75,7 @@ describe('StudentsReducer', () => {
             name: 'First Student',
           }];
 
-      const action = requestDeleteStudent({ id: 2 });
+      const action = deleteStudent({ id: 2 });
       const state = fromReducer.studentsReducer(initialState, action);
 
       expect(state.students).toEqual(deletedStudents);

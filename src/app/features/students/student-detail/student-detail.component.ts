@@ -13,7 +13,8 @@ import { Observable } from 'rxjs';
 })
 export class StudentDetailComponent implements OnInit {
   student: Student | undefined ;
-  student$: Observable<Student> = this.studentService.student$;
+  singleStudent$: Observable<Student> = this.studentService.singleStudent$;
+  isSingleStudentLoading$: Observable<boolean> = this.studentService.isSingleStudentLoading$;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +29,7 @@ export class StudentDetailComponent implements OnInit {
   getStudent(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.studentService.getStudent(id);
-    this.studentService.student$
+    this.studentService.singleStudent$
       .subscribe({next: student => this.student = Object.assign({},student)});
   }
 

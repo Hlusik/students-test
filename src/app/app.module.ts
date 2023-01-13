@@ -32,7 +32,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
     HttpClientInMemoryWebApiModule.forFeature(
-      InMemoryDataService, { dataEncapsulation: false }
+      InMemoryDataService, { dataEncapsulation: false, delay: 5000 }
     ),
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument(),

@@ -15,7 +15,8 @@
         <a class="student" routerLink="/students/{{student.id}}">
             <span class="badge">{{student.id}}</span> {{student.name}}
         </a>
-        <button mat-button color="warn" title="delete student"
-            (click)="delete(student)">x</button>
+        <button mat-button color="warn" title="delete student" (click)="delete(student)">x</button>
     </mat-list-item>
 </mat-selection-list>
+
+<mat-spinner *ngIf="isAllStudentsLoading$ | async"></mat-spinner>
