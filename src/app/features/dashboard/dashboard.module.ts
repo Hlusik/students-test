@@ -15,6 +15,7 @@ import {EffectsModule} from '@ngrx/effects';
 import { studentsFeatureKey, studentsReducer } from '../students/store/students.reducer';
 import { StudentsEffects } from '../students/store/students.effects';
 import { StudentsStateFacade } from '../students/store/students.facade';
+import { ChartModule } from '../chart/chart.module';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { StudentsStateFacade } from '../students/store/students.facade';
     MatProgressSpinnerModule,
     MatListModule,
     RouterModule,
+    ChartModule,
     StoreModule.forFeature(studentsFeatureKey, studentsReducer),
     EffectsModule.forFeature([StudentsEffects])
   ],
