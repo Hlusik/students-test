@@ -35,7 +35,6 @@ export class ChartComponent implements OnInit {
   }; // required
   chartCallback: Highcharts.ChartCallbackFunction = function (chart) {} // optional function, defaults to null
   updateFlag: boolean = false; // optional boolean
-  oneToOneFlag: boolean = true; // optional boolean, defaults to false
   runOutsideAngularFlag: boolean = false; // optional boolean, defaults to false
   // ----------------------------------------------------------------------------------------------------------------
 
@@ -58,15 +57,12 @@ export class ChartComponent implements OnInit {
     let date = new Date();
     const data: any[] = [];
 
-    console.log(this.students);
-
     for (let i = 0; i < students.length; i++) {
       date.setDate(new Date().getDate() + i);
       data.push([`${date.getDate()}/${date.getMonth() + 1}`, students[i].id]);
     }
-    console.log(data);
 
-    const chart = Highcharts.chart('chart-line', {
+    Highcharts.chart('chart-line', {
       chart: {
         type: 'line',
       },

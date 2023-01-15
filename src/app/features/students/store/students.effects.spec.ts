@@ -7,7 +7,18 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 
 import { StudentService } from 'src/app/services/student.service';
 import { Student } from '../student.model';
-import { loadAllStudents, loadAllStudentsSuccess, loadSingleStudent, loadSingleStudentSuccess } from './students.actions';
+import {
+  createStudent,
+  createStudentSuccess,
+  deleteStudent,
+  deleteStudentSuccess,
+  editStudent,
+  editStudentSuccess,
+  loadAllStudents,
+  loadAllStudentsSuccess,
+  loadSingleStudent,
+  loadSingleStudentSuccess,
+} from './students.actions';
 import { StudentsEffects } from './students.effects';
 
 const mockStudents: Student[] = [
@@ -22,9 +33,9 @@ const mockStudents: Student[] = [
 ];
 
 const mockStudent: Student = {
-    id: 2,
-    name: 'Second Student',
-  };
+  id: 2,
+  name: 'Second Student',
+};
 
 const initialState = {
   students: [],
@@ -38,7 +49,6 @@ describe('Students Effects', () => {
   let actions$ = new BehaviorSubject<Action>({ type: loadAllStudents.type });
   let effects: StudentsEffects;
   let resultActions: Action[];
-  // let store: MockStore<StudentsState>;
   let studentService: StudentService;
 
   beforeEach(() => {
@@ -49,15 +59,18 @@ describe('Students Effects', () => {
         provideMockStore({ initialState }),
         {
           provide: StudentService,
-          useFactory: () => jasmine.createSpyObj<StudentService>({
-            getStudents: of(mockStudents),
-            getStudent: of(mockStudent),
-          }),
+          useFactory: () =>
+            jasmine.createSpyObj<StudentService>({
+              getStudents: of(mockStudents),
+              getStudent: of(mockStudent),
+              deleteStudent: of(mockStudent),
+              updateStudent: of(mockStudent),
+              addStudent: of(mockStudent),
+            }),
         },
       ],
     });
     effects = TestBed.inject(StudentsEffects);
-    // store = TestBed.inject(MockStore);
     studentService = TestBed.inject(StudentService);
     resultActions = [];
   });
@@ -72,30 +85,95 @@ describe('Students Effects', () => {
 
       subscribeTo(effects.getStudents$);
       expect(resultActions).toEqual([
-        loadAllStudentsSuccess({ students: mockStudents })
+        loadAllStudentsSuccess({ students: mockStudents }),
       ]);
       expect(studentService.getStudents).toHaveBeenCalledTimes(1);
     });
+  });
 
+  describe('getStudent$', () => {
     it('should call getStudent method', () => {
       setAction(loadSingleStudent);
 
       subscribeTo(effects.getStudent$);
       expect(resultActions).toEqual([
-        loadSingleStudentSuccess({ singleStudent: mockStudent })
+        loadSingleStudentSuccess({ singleStudent: mockStudent }),
       ]);
       expect(studentService.getStudent).toHaveBeenCalledTimes(1);
     });
   });
 
-  function setAction( a: Action): void {
+  describe('delete Student', () => {
+    it('should call deleteStudent method', () => {
+      setAction(deleteStudent);
+
+      subscribeTo(effects.deleteStudent$);
+      expect(resultActions).toEqual([
+        deleteStudentSuccess(),
+      ]);
+      expect(studentService.deleteStudent).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call deleteStudentSuccess method', () => {
+      setAction(deleteStudentSuccess);
+
+      subscribeTo(effects.deleteStudentSuccess$);
+      expect(resultActions).toEqual([
+        loadAllStudents(),
+      ]);
+    });
+  });
+
+  describe('edit Student', () => {
+    it('should call editStudent method', () => {
+      setAction(editStudent);
+
+      subscribeTo(effects.editStudent$);
+      expect(resultActions).toEqual([
+        editStudentSuccess(),
+      ]);
+      expect(studentService.updateStudent).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call editStudentSuccess method', () => {
+      setAction(editStudentSuccess);
+
+      subscribeTo(effects.editStudentSuccess$);
+      expect(resultActions).toEqual([
+        loadAllStudents(),
+      ]);
+    });
+  });
+
+  describe('create Student', () => {
+    it('should call createStudent method', () => {
+      setAction(createStudent);
+
+      subscribeTo(effects.createStudent$);
+      expect(resultActions).toEqual([
+        createStudentSuccess(),
+      ]);
+      expect(studentService.addStudent).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call createStudentSuccess method', () => {
+      setAction(createStudentSuccess);
+
+      subscribeTo(effects.createStudentSuccess$);
+      expect(resultActions).toEqual([
+        loadAllStudents(),
+      ]);
+    });
+  });
+
+  function setAction(a: Action): void {
     actions$.next(a);
   }
 
   function subscribeTo(o: Observable<Action>): void {
     o.subscribe(
-      r => resultActions.push(r),
-      () => fail('There should be no errors here.'),
+      (r) => resultActions.push(r),
+      () => fail('There should be no errors here.')
     );
   }
 });

@@ -5,7 +5,7 @@ import { StudentsStateFacade } from '../students/store/students.facade';
 import { ChartComponent } from './chart.component';
 
 
-xdescribe('ChartComponent', () => {
+describe('ChartComponent', () => {
   let component: ChartComponent;
   let fixture: ComponentFixture<ChartComponent>;
 
