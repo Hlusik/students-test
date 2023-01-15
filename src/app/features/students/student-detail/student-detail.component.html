@@ -10,3 +10,4 @@
 </div>
 
 <app-loader [isLoading]="(isSingleStudentLoading$ | async)!"></app-loader>
+<app-message *ngIf="message$ | async" [message]="(message$ | async)!" [action]="'Close'"></app-message>

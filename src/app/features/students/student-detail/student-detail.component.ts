@@ -15,6 +15,7 @@ export class StudentDetailComponent implements OnInit {
   student: Student | undefined ;
   singleStudent$: Observable<Student> = this.studentService.singleStudent$;
   isSingleStudentLoading$: Observable<boolean> = this.studentService.isSingleStudentLoading$;
+  message$: Observable<string> = this.studentService.errorMessage$;
 
   constructor(
     private route: ActivatedRoute,

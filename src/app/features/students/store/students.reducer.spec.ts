@@ -122,7 +122,7 @@ describe('StudentsReducer', () => {
   });
 
   describe('delete Students action', () => {
-    it('should retrieve delete student and not update the state in an immutable way', () => {
+    it('should retrieve delete student and update the state in an immutable way', () => {
       const { initialState } = fromReducer;
 
       const action = deleteStudent({ id: 2 });
@@ -131,13 +131,14 @@ describe('StudentsReducer', () => {
       expect(state).toEqual(initialState);
     });
 
-    it('should retrieve delete student and not update the state in an immutable way', () => {
+    it('should retrieve delete student Success and update the state in an immutable way', () => {
       const { initialState } = fromReducer;
 
       const action = deleteStudentSuccess();
       const state = fromReducer.studentsReducer(initialState, action);
 
-      expect(state).toEqual(initialState);
+      expect(state.errorMessage).toEqual('Student is successfully deleted!');
+      expect(state).not.toEqual(initialState);
     });
 
     it('should retrieve delete student and update the state in an immutable way', () => {
@@ -161,13 +162,14 @@ describe('StudentsReducer', () => {
       expect(state).toEqual(initialState);
     });
 
-    it('should retrieve edit student and not update the state in an immutable way', () => {
+    it('should retrieve edit student Success and update the state in an immutable way', () => {
       const { initialState } = fromReducer;
 
       const action = editStudentSuccess();
       const state = fromReducer.studentsReducer(initialState, action);
 
-      expect(state).toEqual(initialState);
+      expect(state.errorMessage).toEqual('Student is successfully updated!');
+      expect(state).not.toEqual(initialState);
     });
 
     it('should retrieve edit student and update the state in an immutable way', () => {
@@ -182,7 +184,7 @@ describe('StudentsReducer', () => {
   });
 
   describe('create Students action', () => {
-    it('should retrieve create student and not update the state in an immutable way', () => {
+    it('should retrieve create student and update the state in an immutable way', () => {
       const { initialState } = fromReducer;
 
       const action = createStudent({ singleStudent: newState.singleStudent});
@@ -191,16 +193,17 @@ describe('StudentsReducer', () => {
       expect(state).toEqual(initialState);
     });
 
-    it('should retrieve create student and not update the state in an immutable way', () => {
+    it('should retrieve create student Success and not update the state in an immutable way', () => {
       const { initialState } = fromReducer;
 
       const action = createStudentSuccess();
       const state = fromReducer.studentsReducer(initialState, action);
 
-      expect(state).toEqual(initialState);
+      expect(state.errorMessage).toEqual('Student is successfully created!');
+      expect(state).not.toEqual(initialState);
     });
 
-    it('should retrieve create student and update the state in an immutable way', () => {
+    it('should retrieve create student fail and update the state in an immutable way', () => {
       const { initialState } = fromReducer;
 
       const action = createStudentFail({ errorMessage: newState.errorMessage });
