@@ -9,4 +9,4 @@
     <button mat-button color="primary" (click)="goBack()">go back</button>
 </div>
 
-<mat-spinner *ngIf="isSingleStudentLoading$ | async"></mat-spinner>
+<app-loader [isLoading]="(isSingleStudentLoading$ | async)!"></app-loader>

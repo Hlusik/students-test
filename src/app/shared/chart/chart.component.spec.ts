@@ -1,7 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
-import { StudentsStateFacade } from '../students/store/students.facade';
+import { StudentsStateFacade } from '../../features/students/store/students.facade';
 import { ChartComponent } from './chart.component';
 
 

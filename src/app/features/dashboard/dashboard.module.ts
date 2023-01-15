@@ -15,7 +15,9 @@ import {EffectsModule} from '@ngrx/effects';
 import { studentsFeatureKey, studentsReducer } from '../students/store/students.reducer';
 import { StudentsEffects } from '../students/store/students.effects';
 import { StudentsStateFacade } from '../students/store/students.facade';
-import { ChartModule } from '../chart/chart.module';
+import { ChartModule } from '../../shared/chart/chart.module';
+import { LoaderModule } from 'src/app/shared/loader/loader.module';
+import { MessageModule } from 'src/app/shared/message/message.module';
 
 
 @NgModule({
@@ -23,10 +25,12 @@ import { ChartModule } from '../chart/chart.module';
   imports: [
     CommonModule,
     DashboardRoutingModule,
+    LoaderModule,
     MatButtonModule,
     MatGridListModule,
     MatProgressSpinnerModule,
     MatListModule,
+    MessageModule,
     RouterModule,
     ChartModule,
     StoreModule.forFeature(studentsFeatureKey, studentsReducer),

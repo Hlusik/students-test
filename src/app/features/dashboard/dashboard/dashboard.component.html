@@ -10,4 +10,5 @@
 
 <app-chart></app-chart>
 
-<mat-spinner *ngIf="isAllStudentsLoading$ | async"></mat-spinner>
+<app-loader [isLoading]="(isAllStudentsLoading$ | async)!"></app-loader>
+<app-message *ngIf="message$ | async" [message]="(message$ | async)!" [action]="'Close'"></app-message>

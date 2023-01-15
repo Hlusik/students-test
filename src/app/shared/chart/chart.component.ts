@@ -3,7 +3,7 @@ import * as Highcharts from 'highcharts';
 import { Observable, take } from 'rxjs';
 
 import { Student } from 'src/app/features/students/student.model';
-import { StudentsStateFacade } from '../students/store/students.facade';
+import { StudentsStateFacade } from '../../features/students/store/students.facade';
 
 
 @Component({

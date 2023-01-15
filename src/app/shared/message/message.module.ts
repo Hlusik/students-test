@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { MessageComponent } from './message/message.component';
 
@@ -11,8 +10,7 @@ import { MessageComponent } from './message/message.component';
   declarations: [MessageComponent],
   imports: [
     CommonModule,
-    MatButtonModule,
-    MatCardModule,
+    MatSnackBarModule,
   ],
   exports: [MessageComponent],
 })

@@ -13,6 +13,7 @@ import { StudentsStateFacade } from '../../students/store/students.facade';
 export class DashboardComponent implements OnInit {
   students$: Observable<Student[]> = this.studentService.topStudents$;
   isAllStudentsLoading$: Observable<boolean> = this.studentService.isAllStudentsLoading$;
+  message$: Observable<string> = this.studentService.errorMessage$;
 
   constructor(private studentService: StudentsStateFacade) { }
 

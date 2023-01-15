@@ -11,24 +11,26 @@ import {MatIconModule} from '@angular/material/icon';
 import {StudentsListComponent} from './students-list/students-list.component';
 import {StudentDetailComponent} from './student-detail/student-detail.component';
 import {StudentsRoutingModule} from './students-routing.module';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import { studentsFeatureKey, studentsReducer } from './store/students.reducer';
 import { StudentsEffects } from './store/students.effects';
 import { StudentsStateFacade } from './store/students.facade';
+import { MessageModule } from '../../shared/message/message.module';
+import { LoaderModule } from 'src/app/shared/loader/loader.module';
 
 @NgModule({
   declarations: [StudentsListComponent, StudentDetailComponent],
   imports: [
     CommonModule,
     FormsModule,
+    LoaderModule,
     MatButtonModule,
     MatInputModule,
     MatListModule,
     MatIconModule,
-    MatProgressSpinnerModule,
+    MessageModule,
     RouterModule,
     StudentsRoutingModule,
     StoreModule.forFeature(studentsFeatureKey, studentsReducer),

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { StudentsStateFacade } from '../students/store/students.facade';
-import { StudentsEffects } from '../students/store/students.effects';
+import { StudentsStateFacade } from '../../features/students/store/students.facade';
+import { StudentsEffects } from '../../features/students/store/students.effects';
 import {
   studentsFeatureKey,
   studentsReducer,
-} from '../students/store/students.reducer';
+} from '../../features/students/store/students.reducer';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { HighchartsChartModule } from 'highcharts-angular';

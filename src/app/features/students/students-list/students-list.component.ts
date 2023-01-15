@@ -12,6 +12,7 @@ import { Student } from '../student.model';
 export class StudentsListComponent implements OnInit {
   readonly students$: Observable<Student[]> = this.studentService.students$;
   isAllStudentsLoading$: Observable<boolean> = this.studentService.isAllStudentsLoading$;
+  message$: Observable<string> = this.studentService.errorMessage$;
 
   constructor(private studentService: StudentsStateFacade) { }
 
