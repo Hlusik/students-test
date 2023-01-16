@@ -1,12 +1,20 @@
 <div *ngIf="student" class="detail-wrapper">
-    <h2>{{student.name | uppercase}} Details</h2>
-    <div>id: {{student.id}}</div>
+    <h2>{{student.name | uppercase}} details</h2>
+    <p>id: {{student.id}}</p>
+
     <mat-form-field class="detail-input">
-        <mat-label for="student-name">Student name: </mat-label>
+        <mat-label>Student name: </mat-label>
         <input matInput type="text" id="student-name" [(ngModel)]="student.name" placeholder="name">
     </mat-form-field>
-    <button mat-button color="primary" (click)="save()">save</button>
-    <button mat-button color="primary" (click)="goBack()">go back</button>
+
+    <button mat-button color="primary" (click)="save()">
+        <mat-icon aria-hidden="false" aria-label="save" fontIcon="save"></mat-icon>
+        Save
+    </button>
+    <button mat-button color="primary" (click)="goBack()">
+        <mat-icon aria-hidden="false" aria-label="home" fontIcon="home"></mat-icon>
+        Go back
+    </button>
 </div>
 
 <app-loader [isLoading]="(isSingleStudentLoading$ | async)!"></app-loader>

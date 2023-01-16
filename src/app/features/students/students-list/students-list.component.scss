@@ -1,18 +1,25 @@
-.spinner {
-  height: 100vh;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.286);
-  z-index: 10;
-  top: 0;
-  left: 0;
-  position: fixed;
+section {
+  display: flex;
+  align-items: start;
+
+
+  button {
+    height: 56px;
+    border: 1px solid grey;
+  }
 }
 
-.center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -moz-transform: translateX(-50%) translateY(-50%);
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
+.divider {
+  background: grey;
+}
+
+.student {
+  button {
+    width: 100px;
+    margin: 0 10px;
+  }
+  a {
+    text-decoration: none;
+    color: grey;
+  }
 }

@@ -10,8 +10,6 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/in-memory-data.service';
 
-import { MessageModule } from './shared/message/message.module';
-
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -31,7 +29,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
     HttpClientInMemoryWebApiModule.forFeature(
-      InMemoryDataService, { dataEncapsulation: false, delay: 5000 }
+      InMemoryDataService, { dataEncapsulation: false, delay: 2000 }
     ),
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument(),

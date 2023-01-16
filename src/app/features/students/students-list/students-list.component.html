@@ -1,24 +1,27 @@
 <h2>My Students</h2>
+<section>
+  <mat-form-field class="new-student-input">
+    <mat-label>Student name:</mat-label>
+    <input matInput placeholder="Test name" #studentName>
+  </mat-form-field>
+  <button mat-button color="primary" (click)="add(studentName.value); studentName.value = ''">
+    Add student
+    <mat-icon aria-hidden="false" aria-label="add" fontIcon="add"></mat-icon>
+  </button>
+</section>
 
-<mat-form-field class="new-student-input">
-  <mat-label for="new-student">Student name: </mat-label>
-  <input matInput type="text" id="new-student" #studentName />
-</mat-form-field>
+<mat-divider class="divider"></mat-divider>
 
-<button mat-button color="primary" (click)="add(studentName.value); studentName.value = ''">
-  Add student
-</button>
-
-<mat-selection-list>
+<mat-list>
   <mat-list-item class="student" role="listitem" *ngFor="let student of students$ | async">
-    <a class="student" routerLink="/students/{{ student.id }}">
-      <span class="badge">{{ student.id }}</span> {{ student.name }}
-    </a>
     <button mat-button color="warn" title="delete student" (click)="delete(student)">
-      x
+      <mat-icon aria-hidden="false" aria-label="delete" fontIcon="delete"></mat-icon>
     </button>
+    <a class="student-link" routerLink="/students/{{ student.id }}">
+      <span class="badge">{{ student.id }}.</span> {{ student.name }}
+    </a>
   </mat-list-item>
-</mat-selection-list>
+</mat-list>
 
 <app-loader [isLoading]="(isAllStudentsLoading$ | async)!"></app-loader>
 <app-message *ngIf="message$ | async" [message]="(message$ | async)!" [action]="'Close'"></app-message>

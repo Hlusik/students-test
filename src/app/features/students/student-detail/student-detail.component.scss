@@ -1,17 +1,9 @@
 
-// .detail-wrapper {
-//     display: flex;
-//     flex-direction: column;
-//     min-width: 150px;
-//     max-width: 500px;
-//     width: 100%;
-
-//     input {
-//         height: 60px;
-//     }
-
-//     .button-space {
-//         margin: 10px 0;
-//         width: 100%;
-//     }
-// }
+.detail-wrapper {
+    display: flex;
+    flex-direction: column;
+    button {
+        height: 56px;
+        border: 1px solid grey;
+    }
+}
